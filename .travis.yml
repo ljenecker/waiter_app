@@ -1,14 +1,14 @@
 language: node_js
 
 env:
-  - DATABASE_URL=postgresql://postgres@localhost:5432/registration_numbers_app_tests
+  - DATABASE_URL=postgresql://postgres@localhost:5432/waiters_app_tests
 
 node_js:
   - "v9.11.2"
 
 before_script:
-  - psql -c 'create database  registration_numbers_app_tests;' -U postgres
-  - psql -U postgres -d registration_numbers_app_tests -a -f tables.sql
+  - psql -c 'create database  waiters_app_tests;' -U postgres
+  - psql -U postgres -d waiters_app_tests -a -f tables.sql
 
 addons:
     apt:
