@@ -9,7 +9,7 @@ const pool = new Pool({
     connectionString
 });
 
-describe('The basic registration number web app', function () {
+describe('The waiters web app', function () {
     beforeEach(async function () {
         await pool.query('delete from staff;');
         await pool.query('delete from work_schedule;');
