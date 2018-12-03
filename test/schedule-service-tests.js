@@ -28,6 +28,19 @@ describe('The waiters web app', function () {
 
     });
 
+    it('should be able to get a staff member', async function () {
+        let scheduleService = ScheduleService(pool);
+
+        let staff = await scheduleService.createStaff({
+            first_name: 'Lorenzo',
+            last_name: 'Jenecker'
+        });
+
+        staff = await scheduleService.getStaffById(staff.id);
+        assert.equal('Lorenzo Jenecker', staff.first_name + ' ' + staff.last_name);
+
+    });
+
     after(function () {
         pool.end();
     });
