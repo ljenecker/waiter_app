@@ -27,7 +27,7 @@ describe('The waiters web app', function () {
         assert.equal('Lorenzo Jenecker', staff.first_name + ' ' + staff.last_name);
     });
 
-    it('should be able to get a staff member', async function () {
+    it('should be able to get a staff member by staff id', async function () {
         let scheduleService = ScheduleService(pool);
 
         let staff = await scheduleService.createStaff({
@@ -37,6 +37,18 @@ describe('The waiters web app', function () {
 
         staff = await scheduleService.getStaffById(staff.id);
         assert.equal('Lorenzo Jenecker', staff.first_name + ' ' + staff.last_name);
+    });
+
+    it('should be able to get a staff member by staff name', async function () {
+        let scheduleService = ScheduleService(pool);
+
+        let staff = await scheduleService.createStaff({
+            first_name: 'Lorenzo',
+            last_name: ''
+        });
+
+        staff = await scheduleService.getStaffByName(staff.first_name);
+        assert.equal('Lorenzo', staff.first_name);
     });
 
     it('should be able to get all staff members', async function () {
@@ -97,7 +109,7 @@ describe('The waiters web app', function () {
         assert.equal(true, shift.monday);
     });
 
-    it('should be able to get shift by staff member', async function () {
+    it('should be able to get shift by staff member id', async function () {
         let scheduleService = ScheduleService(pool);
 
         let staff = await scheduleService.createStaff({
@@ -121,7 +133,47 @@ describe('The waiters web app', function () {
         assert.equal(true, shift.monday);
     });
 
-    it('should be able to get update shift by staff member', async function () {
+    it('should be able to get all shifts', async function () {
+        let scheduleService = ScheduleService(pool);
+
+        let staff = await scheduleService.createStaff({
+            first_name: 'Lorenzo',
+            last_name: 'Jenecker'
+        });
+
+        await scheduleService.createShift({
+            monday: true,
+            tuesday: false,
+            wednesday: true,
+            thursday: false,
+            friday: true,
+            saturday: false,
+            sunday: true,
+            staff_id: staff.id
+        });
+
+        await scheduleService.createStaff({
+            first_name: 'Andre',
+            last_name: 'Vermeulen'
+        });
+
+        await scheduleService.createShift({
+            monday: true,
+            tuesday: false,
+            wednesday: true,
+            thursday: false,
+            friday: true,
+            saturday: false,
+            sunday: true,
+            staff_id: staff.id
+        });
+
+        let shifts = await scheduleService.getAllShifts();
+
+        assert.equal(2, shifts.length);
+    });
+
+    it('should be able to update shift by staff member', async function () {
         let scheduleService = ScheduleService(pool);
 
         let staff = await scheduleService.createStaff({

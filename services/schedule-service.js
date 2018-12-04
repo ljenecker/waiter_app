@@ -17,6 +17,12 @@ module.exports = function ScheduleService (pool) {
         return staff;
     }
 
+    async function getStaffByName (id) {
+        let staffResult = await pool.query('SELECT * FROM staff WHERE first_name = $1', [id]);
+        let staff = staffResult.rows[0];
+        return staff;
+    }
+
     async function getAllStaff () {
         let staffResult = await pool.query('SELECT * FROM staff');
         let staff = staffResult.rows;
@@ -48,10 +54,17 @@ module.exports = function ScheduleService (pool) {
     }
 
     async function getShiftByStaffId (id) {
-        let staffResult = await pool.query('SELECT * FROM work_schedule WHERE staff_id = $1', [id]);
-        let staff = staffResult.rows[0];
+        let shiftResult = await pool.query('SELECT * FROM work_schedule WHERE staff_id = $1', [id]);
+        let shift = shiftResult.rows[0];
 
-        return staff;
+        return shift;
+    }
+
+    async function getAllShifts () {
+        let shiftsResult = await pool.query('SELECT * FROM work_schedule');
+        let shifts = shiftsResult.rows;
+
+        return shifts;
     }
 
     async function updateShift (shift) {
@@ -79,10 +92,12 @@ module.exports = function ScheduleService (pool) {
     return {
         createStaff,
         getStaffById,
+        getStaffByName,
         getAllStaff,
         deleteAllStaff,
         createShift,
         getShiftByStaffId,
+        getAllShifts,
         updateShift,
         deleteShiftByStaffId
     };
