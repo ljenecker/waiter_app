@@ -131,7 +131,7 @@ describe('The waiters web app', function () {
             day_name: 'Tuesday'
         }];
 
-        assert.deepEqual(expectedShift, shift);
+        assert.deepStrictEqual(expectedShift, shift);
     });
 
     it('should NOT be able to add the same shift(s) twice', async function () {
@@ -154,7 +154,7 @@ describe('The waiters web app', function () {
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        assert.deepEqual(1, shift.length);
+        assert.deepStrictEqual(1, shift.length);
     });
 
     it('should be able to get shift(s) by waiter id', async function () {
@@ -183,7 +183,7 @@ describe('The waiters web app', function () {
             day_name: 'Tuesday'
         }];
 
-        assert.deepEqual(expectedShift, shift);
+        assert.deepStrictEqual(expectedShift, shift);
     });
 
     it('should be able to get all shifts', async function () {
@@ -262,7 +262,7 @@ describe('The waiters web app', function () {
         }
         ];
 
-        assert.deepEqual(expectedShift, listShifts);
+        assert.deepStrictEqual(expectedShift, listShifts);
     });
 
     it('should be able to update shift by waiter member', async function () {
@@ -290,7 +290,7 @@ describe('The waiters web app', function () {
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        assert.deepEqual(3, shift.length);
+        assert.deepStrictEqual(3, shift.length);
     });
 
     it('should be able to delete shift by waiter member', async function () {
@@ -329,7 +329,7 @@ describe('The waiters web app', function () {
             day_name: 'Wednesday'
         }];
 
-        assert.deepEqual(expectedShift, shift);
+        assert.deepStrictEqual(expectedShift, shift);
     });
 
     after(function () {
