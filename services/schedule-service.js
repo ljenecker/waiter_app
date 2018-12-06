@@ -82,7 +82,10 @@ module.exports = function ScheduleService (pool) {
                                             FROM week_days 
                                                 LEFT JOIN shifts ON shifts.week_days_id = week_days.id 
                                                 LEFT JOIN waiters ON shifts.waiter_id = waiters.id
-                                                ORDER BY week_days.day_number`);
+                                            ORDER BY 
+                                                week_days.day_number, 
+                                                waiters.first_name, 
+                                                waiters.last_name`);
         let shift = shiftResult.rows;
 
         return shift;
