@@ -74,7 +74,15 @@ module.exports = function ScheduleService (pool) {
     }
 
     async function getShifts () {
-        let shiftResult = await pool.query('SELECT week_days.day_name, waiters.first_name,waiters.last_name FROM week_days LEFT JOIN shifts ON shifts.week_days_id = week_days.id LEFT JOIN waiters ON shifts.waiter_id = waiters.id');
+        let shiftResult = await pool.query(`SELECT 
+                                                week_days.day_number,
+                                                week_days.day_name, 
+                                                waiters.first_name, 
+                                                waiters.last_name 
+                                            FROM week_days 
+                                                LEFT JOIN shifts ON shifts.week_days_id = week_days.id 
+                                                LEFT JOIN waiters ON shifts.waiter_id = waiters.id
+                                                ORDER BY week_days.day_number`);
         let shift = shiftResult.rows;
 
         return shift;
