@@ -261,12 +261,7 @@ describe('The waiters web app', function () {
             waiters: []
         }
         ];
-        
-        console.log(expectedShift);
-        console.log('-----------------------------------');
-        console.log(listShifts);
-        console.log('-----------------------------------');
-        
+
         assert.deepStrictEqual(expectedShift, listShifts);
     });
 
