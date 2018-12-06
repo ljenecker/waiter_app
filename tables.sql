@@ -1,18 +1,28 @@
-create table staff (
+create table week_days (
+	id serial not null primary key,
+  day_number int not null,
+  day_name text not null
+);
+
+create table waiters (
 	id serial not null primary key,
 	first_name text not null,
 	last_name text not null
 );
 
-create table work_schedule (
+create table shifts (
 	id serial not null primary key,
-  monday BOOLEAN not null,
-  tuesday BOOLEAN not null,
-  wednesday BOOLEAN not null,
-  thursday BOOLEAN not null,
-  friday BOOLEAN not null,
-  saturday BOOLEAN not null,
-  sunday BOOLEAN not null,
-	staff_id int not null,
-	foreign key (staff_id) references staff(id)
+	waiter_id int not null,
+	foreign key (waiter_id) references waiters(id),
+	week_days_id int not null,
+	foreign key (week_days_id) references week_days(id)
 );
+
+INSERT INTO week_days (day_number,day_name)
+VALUES (1, 'Monday'),
+(2, 'Tuesday'),
+(3, 'Wednesday'),
+(4, 'Thursday'),
+(5, 'Friday'),
+(6, 'Saturday'),
+(7, 'Sunday');
