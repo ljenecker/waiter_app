@@ -1,11 +1,13 @@
 module.exports = function ScheduleService (pool) {
-    async function createWaiter (waiter) {
-        let data = [
-            waiter.first_name,
-            waiter.last_name
-        ];
+    async function getWeekDays () {
+        let weekDaysResult = await pool.query('SELECT * FROM week_days');
+        weekDays = weekDaysResult.rows;
 
-        let waiterResult = await pool.query(`INSERT into waiters (first_name, last_name) values ($1, $2) returning id, first_name, last_name`, data);
+        return weekDays;
+    }
+
+    async function createWaiter (waiter) {
+        let waiterResult = await pool.query(`INSERT into waiters (username) values ($1) returning id, username`, [waiter]);
         waiter = waiterResult.rows[0];
 
         return waiter;
@@ -17,8 +19,8 @@ module.exports = function ScheduleService (pool) {
         return waiter;
     }
 
-    async function getWaiterByName (id) {
-        let waiterResult = await pool.query('SELECT * FROM waiters WHERE first_name = $1', [id]);
+    async function getWaiterByName (name) {
+        let waiterResult = await pool.query('SELECT * FROM waiters WHERE username = $1', [name]);
         let waiter = waiterResult.rows[0];
         return waiter;
     }
@@ -74,33 +76,27 @@ module.exports = function ScheduleService (pool) {
     }
 
     async function getShifts () {
-        let shiftResult = await pool.query(`SELECT 
+        let shiftResult = await pool.query(`SELECT
                                                 week_days.day_number,
-                                                week_days.day_name, 
-                                                waiters.first_name, 
-                                                waiters.last_name 
-                                            FROM week_days 
-                                                LEFT JOIN shifts ON shifts.week_days_id = week_days.id 
+                                                week_days.day_name,
+                                                waiters.username
+                                            FROM week_days
+                                                LEFT JOIN shifts ON shifts.week_days_id = week_days.id
                                                 LEFT JOIN waiters ON shifts.waiter_id = waiters.id
-                                            ORDER BY 
-                                                week_days.day_number, 
-                                                waiters.first_name, 
-                                                waiters.last_name`);
+                                            ORDER BY
+                                                week_days.day_number,
+                                                waiters.username`);
         let shift = shiftResult.rows;
 
         return shift;
     }
 
-    async function deleteShiftByWaiterId (shift) {
-        let data = [
-            shift.waiter_id,
-            shift.day_number
-        ];
-
-        return pool.query('DELETE FROM shifts WHERE waiter_id = $1 and week_days_id = (SELECT id FROM week_days WHERE day_number = $2)', data);
+    async function deleteShiftByWaiterId (id) {
+        return pool.query('DELETE FROM shifts WHERE waiter_id = $1', [id]);
     }
 
     return {
+        getWeekDays,
         createWaiter,
         getWaiterById,
         getWaiterByName,

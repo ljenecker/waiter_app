@@ -3,15 +3,13 @@ module.exports = function shiftsFormat (shift) {
 
     for (let key in shift) {
         let currentDay = shift[key].day_name;
-        let firstName = shift[key].first_name;
-        let lastName = shift[key].last_name;
-        let fullName = firstName + ' ' + lastName;
+        let fullName = shift[key].username;
 
         if (filteredShifts[currentDay] === undefined) {
             filteredShifts[currentDay] = [];
         }
 
-        if (firstName != null) {
+        if (fullName != null) {
             filteredShifts[currentDay].push(fullName);
         }
     }

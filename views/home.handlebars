@@ -1,7 +1,32 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-12'>
-      <h1>Test</h1>
+<link rel="stylesheet" href="../css/login.css">
+
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-12">
+
+
+
+      <form method="get" action="/waiters/">
+      <div class="col_md_login" id="col_md_login">
+        <div class="cont_ba_opcitiy">
+          <h2>Staff Login</h2>
+          <p>Create a new shift or amend your existing one.</p>
+          <input autocomplete="off" class="form-control mx-auto staff_name_show" type="text" name="username" id="staff_name" placeholder="Please enter your name">
+          <button type="submit" class="btn_login" id="btn_login">LOGIN</button>
+        </div>
+      </div>
+    </form>
+
+    <form method="get" action="/days">
+      <div class="col_md_sign_up">
+        <div class="cont_ba_opcitiy">
+          <h2>Admin Login</h2>
+          <p>View weekly calender and amend shifts.</p>
+          <button class="btn_sign_up">LOGIN</button>
+        </div>
+      </div>
+    </form>
+
     </div>
   </div>
 </div>

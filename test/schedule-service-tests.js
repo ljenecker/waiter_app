@@ -19,51 +19,36 @@ describe('The waiters web app', function () {
     it('should be able to add a waiter', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         waiter = await scheduleService.getWaiterById(waiter.id);
-        assert.equal('Lorenzo Jenecker', waiter.first_name + ' ' + waiter.last_name);
+        assert.equal('Lorenzo', waiter.username);
     });
 
     it('should be able to get a waiter by waiter id', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         waiter = await scheduleService.getWaiterById(waiter.id);
-        assert.equal('Lorenzo Jenecker', waiter.first_name + ' ' + waiter.last_name);
+        assert.equal('Lorenzo', waiter.username);
     });
 
     it('should be able to get a waiter by waiter name', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: ''
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
-        waiter = await scheduleService.getWaiterByName(waiter.first_name);
-        assert.equal('Lorenzo', waiter.first_name);
+        waiter = await scheduleService.getWaiterByName(waiter.username);
+        assert.equal('Lorenzo', waiter.username);
     });
 
     it('should be able to get all waiters', async function () {
         let scheduleService = ScheduleService(pool);
 
-        await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        await scheduleService.createWaiter('Lorenzo');
 
-        await scheduleService.createWaiter({
-            first_name: 'Andre',
-            last_name: 'Vermeulen'
-        });
+        await scheduleService.createWaiter('Andre');
 
         let waiters = await scheduleService.getWaiters();
         assert.equal(2, waiters.length);
@@ -72,15 +57,9 @@ describe('The waiters web app', function () {
     it('should be able to delete a waiter', async function () {
         let scheduleService = ScheduleService(pool);
 
-        await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        await scheduleService.createWaiter('Lorenzo');
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Andre',
-            last_name: 'Vermeulen'
-        });
+        let waiter = await scheduleService.createWaiter('Andre');
 
         await scheduleService.deleteWaiterById(waiter.id);
         let waiters = await scheduleService.getWaiters();
@@ -90,15 +69,9 @@ describe('The waiters web app', function () {
     it('should be able to delete all waiters', async function () {
         let scheduleService = ScheduleService(pool);
 
-        await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        await scheduleService.createWaiter('Lorenzo');
 
-        await scheduleService.createWaiter({
-            first_name: 'Andre',
-            last_name: 'Vermeulen'
-        });
+        await scheduleService.createWaiter('Andre');
 
         await scheduleService.deleteWaiters();
         let waiters = await scheduleService.getWaiters();
@@ -108,10 +81,7 @@ describe('The waiters web app', function () {
     it('should be able to add shift(s) to waiter', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -137,10 +107,7 @@ describe('The waiters web app', function () {
     it('should NOT be able to add the same shift(s) twice', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -160,10 +127,7 @@ describe('The waiters web app', function () {
     it('should be able to get shift(s) by waiter id', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -189,10 +153,7 @@ describe('The waiters web app', function () {
     it('should be able to get all shifts', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -209,10 +170,7 @@ describe('The waiters web app', function () {
             day_number: 5
         });
 
-        let waiter_2 = await scheduleService.createWaiter({
-            first_name: 'Andre',
-            last_name: 'Vermeulen'
-        });
+        let waiter_2 = await scheduleService.createWaiter('Andre');
 
         await scheduleService.createShift({
             waiter_id: waiter_2.id,
@@ -234,7 +192,7 @@ describe('The waiters web app', function () {
 
         let expectedShift = [{
             day: 'Monday',
-            waiters: ['Andre Vermeulen', 'Lorenzo Jenecker']
+            waiters: ['Andre', 'Lorenzo']
         },
         {
             day: 'Tuesday',
@@ -242,15 +200,15 @@ describe('The waiters web app', function () {
         },
         {
             day: 'Wednesday',
-            waiters: ['Lorenzo Jenecker']
+            waiters: ['Lorenzo']
         },
         {
             day: 'Thursday',
-            waiters: ['Andre Vermeulen']
+            waiters: ['Andre']
         },
         {
             day: 'Friday',
-            waiters: ['Andre Vermeulen', 'Lorenzo Jenecker']
+            waiters: ['Andre', 'Lorenzo']
         },
         {
             day: 'Saturday',
@@ -268,10 +226,7 @@ describe('The waiters web app', function () {
     it('should be able to update shift by waiter member', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -296,10 +251,7 @@ describe('The waiters web app', function () {
     it('should be able to delete shift by waiter member', async function () {
         let scheduleService = ScheduleService(pool);
 
-        let waiter = await scheduleService.createWaiter({
-            first_name: 'Lorenzo',
-            last_name: 'Jenecker'
-        });
+        let waiter = await scheduleService.createWaiter('Lorenzo');
 
         await scheduleService.createShift({
             waiter_id: waiter.id,
@@ -316,20 +268,11 @@ describe('The waiters web app', function () {
             day_number: 3
         });
 
-        await scheduleService.deleteShiftByWaiterId({
-            waiter_id: waiter.id,
-            day_number: 2
-        });
+        await scheduleService.deleteShiftByWaiterId(waiter.id);
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        let expectedShift = [{
-            day_name: 'Monday'
-        }, {
-            day_name: 'Wednesday'
-        }];
-
-        assert.deepStrictEqual(expectedShift, shift);
+        assert.deepStrictEqual(0, shift.length);
     });
 
     after(function () {

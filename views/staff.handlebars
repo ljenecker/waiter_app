@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="../css/staff.css">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1> Welcome {{username}}</h1>
+      {{#if messages.account}}
+        <h5 class='accountMsg'> {{messages.account}}</h5>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h5> Please select the days you are willing to work for the week</h5>
+    </div>
+  </div>
+
+  <form method="post" action="/waiters/{{username}}">
+    <div class="row">
+      <div class="col-12">
+        <div class="weekDays-selector">
+          <!-- <input type="checkbox" id="weekday-Monday" class="weekday" name="weekday" value='1'/>
+          <label for="weekday-Monday">Monday</label>
+          <input type="checkbox" id="weekday-Tuesday" class="weekday" name="weekday" value='2'/>
+          <label for="weekday-Tuesday">Tuesday</label>
+          <input type="checkbox" id="weekday-Wednesday" class="weekday" name="weekday" value='3'/>
+          <label for="weekday-Wednesday">Wednesday</label>
+          <input type="checkbox" id="weekday-Thursday" class="weekday" name="weekday" value='4'/>
+          <label for="weekday-Thursday">Thursday</label>
+          <input type="checkbox" id="weekday-Friday" class="weekday" name="weekday" value='5'/>
+          <label for="weekday-Friday">Friday</label>
+          <input type="checkbox" id="weekday-Saturday" class="weekday" name="weekday" value='6'/>
+          <label for="weekday-Saturday">Saturday</label>
+          <input type="checkbox" id="weekday-Sunday" class="weekday" name="weekday" value='7'/>
+          <label for="weekday-Sunday">Sunday</label> -->
+
+          {{#weekDays}}
+            <!-- <option {{selected}}  value="{{code}}">{{location}}</option> -->
+            <input type="checkbox" id="weekday-{{day_name}}" class="weekday" name="weekday" value={{day_number}} {{checked}}/>
+            <label for="weekday-{{day_name}}">{{day_name}}</label>
+          {{/weekDays}}
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <button type="submit" class="btn btn-info mx-auto save">Save</button>
+          <input type="hidden" name="username" value={{username}}>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

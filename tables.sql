@@ -6,8 +6,7 @@ create table week_days (
 
 create table waiters (
 	id serial not null primary key,
-	first_name text not null,
-	last_name text not null
+	username text not null
 );
 
 create table shifts (

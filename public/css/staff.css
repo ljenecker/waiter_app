@@ -1,0 +1,44 @@
+.staff {
+  background-image: url("/img/food.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+h1, h5 {
+  text-align: center;
+}
+
+.weekDays-selector {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.weekDays-selector input {
+  display: none !important;
+}
+
+.weekDays-selector input[type=checkbox]+label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 40px;
+  width: 100px;
+  margin-right: 3px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type=checkbox]:checked+label {
+  background: #2AD705;
+  color: #ffffff;
+}
+
+.save {
+  margin-top: 50px;
+  display: block;
+}
+
+.accountMsg {
+  color: red;
+}

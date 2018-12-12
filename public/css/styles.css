@@ -1,0 +1,103 @@
+body, html {
+  height: 100%;
+}
+
+.cont_ba_opcitiy {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 80%;
+  border-radius: 3px;
+  padding: 15px 0px;
+}
+
+.cont_ba_opcitiy:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.col_md_login {
+  position: relative;
+  float: left;
+  width: 50%;
+  margin: 0px auto;
+  padding: 0px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.col_md_login>h2 {
+  font-weight: 400;
+  margin-top: 70px;
+  color: #757575;
+}
+
+.col_md_login>p {
+  font-weight: 400;
+  margin-top: 15px;
+  width: 80%;
+  color: #37474F;
+}
+
+.cont_ba_opcitiy>h2 {
+  font-weight: 400;
+  color: #fff;
+}
+
+.cont_ba_opcitiy>p {
+  font-weight: 400;
+  margin-top: 15px;
+  color: #fff;
+}
+
+.col_md_sign_up {
+  position: relative;
+  float: left;
+  width: 50%;
+  margin: 0px auto;
+  padding: 0px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn_sign_up {
+  background-color: #ef5350;
+  border: none;
+  padding: 10px;
+  width: 200px;
+  border-radius: 3px;
+  box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  margin-top: 58px;
+  cursor: pointer;
+}
+
+.btn_login {
+  background-color: #26C6DA;
+  border: none;
+  padding: 10px;
+  width: 200px;
+  border-radius: 3px;
+  box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn_login_hidden {
+  display: none;
+}
+
+.staff_name_hidden {
+  display: none;
+}
+
+.staff_name_show {
+  display: block;
+  padding: 15px 0px;
+  width: 200px;
+  border-radius: 3px;
+  box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  margin-top: 26px;
+  text-align: center;
+}

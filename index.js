@@ -17,7 +17,7 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 // which db connection to use
-const connectionString = process.env.DATABASE_URL || 'postgresql://lorenzo:123@localhost:5432/registration_numbers_app_tests';
+const connectionString = process.env.DATABASE_URL || 'postgresql://lorenzo:123@localhost:5432/waiters_app';
 
 const pool = new Pool({
     connectionString,
@@ -48,6 +48,9 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.get('/', scheduleRoutes.show);
+app.get('/waiters/:username?', scheduleRoutes.staff);
+app.post('/waiters/:username', scheduleRoutes.staff);
+app.get('/days', scheduleRoutes.admin);
 
 const PORT = process.env.PORT || 3007;
 
