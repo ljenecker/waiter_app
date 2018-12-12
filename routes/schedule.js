@@ -1,3 +1,5 @@
+const shiftsFormat = require('../util/shifts-format');
+
 module.exports = function (scheduleService) {
     async function show (req, res, next) {
         try {
@@ -91,7 +93,17 @@ module.exports = function (scheduleService) {
 
     async function admin (req, res, next) {
         try {
-            res.render('admin');
+            let shifts = await scheduleService.getShifts();
+            let listShifts = shiftsFormat(shifts);
+
+            let weekDaysResult = await scheduleService.getWeekDays();
+
+            console.log(listShifts);
+
+            res.render('admin', {
+                weekDays: weekDaysResult,
+                listShifts: listShifts
+            });
         } catch (err) {
             next(err);
         }

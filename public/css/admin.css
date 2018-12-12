@@ -178,3 +178,30 @@ table tbody tr td.hour span {
     -moz-transform: translateY(16px) rotate(270deg);
   }
 }
+
+
+
+.green {
+  background-color: #3CB371;
+}
+
+.red {
+  background-color: #DC143C
+}
+
+.blue {
+  background-color: #00BFFF;
+}
+
+
+li {
+
+  list-style: none;
+
+}
+
+ul {
+
+  padding: 0px;
+  margin: 0px;
+}

@@ -17,76 +17,28 @@
       <table>
         <thead>
           <tr>
-            <th>
-              <span class="long">Monday</span>
-              <span class="short">Mon</span>
-            </th>
-            <th>
-              <span class="long">Tuesday</span>
-              <span class="short">Tue</span>
-            </th>
-            <th>
-              <span class="long">Wendsday</span>
-              <span class="short">Wed</span>
-            </th>
-            <th>
-              <span class="long">Thursday</span>
-              <span class="short">Thur</span>
-            </th>
-            <th>
-              <span class="long">Friday</span>
-              <span class="short">Fri</span>
-            </th>
-            <th>
-              <span class="long">Saturday</span>
-              <span class="short">Sat</span>
-            </th>
-            <th>
-              <span class="long">Sunday</span>
-              <span class="short">Sun</span>
-            </th>
+            {{#weekDays}}
+              <th>
+                <span class="long">{{day_name}}</span>
+                <span class="short">{{day_name_short}}</span>
+              </th>
+            {{/weekDays}}
           </tr>
         </thead>
         <tbody>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            {{#listShifts}}
+              <td class="green">
+                <ul>
+                  {{#each waiters}}
+                    <li>{{this}}</li>
+                  {{/each}}
+                </ul>
+              </td>
+            {{/listShifts}}
           </tr>
         </tbody>
       </table>
-
-
     </div>
   </div>
 

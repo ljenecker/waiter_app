@@ -1,7 +1,8 @@
 create table week_days (
 	id serial not null primary key,
   day_number int not null,
-  day_name text not null
+  day_name text not null,
+  day_name_short text not null
 );
 
 create table waiters (
@@ -17,11 +18,11 @@ create table shifts (
 	foreign key (week_days_id) references week_days(id)
 );
 
-INSERT INTO week_days (day_number,day_name)
-VALUES (1, 'Monday'),
-(2, 'Tuesday'),
-(3, 'Wednesday'),
-(4, 'Thursday'),
-(5, 'Friday'),
-(6, 'Saturday'),
-(7, 'Sunday');
+INSERT INTO week_days (day_number,day_name,day_name_short)
+VALUES (1, 'Monday', 'Mon'),
+(2, 'Tuesday', 'Tue'),
+(3, 'Wednesday', 'Wed'),
+(4, 'Thursday', 'Thu'),
+(5, 'Friday', 'Fri'),
+(6, 'Saturday', 'Sat'),
+(7, 'Sunday', 'Sun');
