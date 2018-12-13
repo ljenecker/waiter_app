@@ -17,8 +17,17 @@ module.exports = function shiftsFormat (shift) {
     let listShifts = [];
 
     for (let key in filteredShifts) {
+        let status = 0;
+
+        if (filteredShifts[key].length > 3) {
+            status = 'blue';
+        } else if (filteredShifts[key].length < 3) {
+            status = 'red';
+        } else { status = 'green'; }
+
         listShifts.push({
             day: key,
+            status: status,
             waiters: filteredShifts[key]
         });
     }

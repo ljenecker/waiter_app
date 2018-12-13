@@ -6,6 +6,9 @@
       {{#if messages.account}}
         <h5 class='accountMsg'> {{messages.account}}</h5>
       {{/if}}
+      {{#if messages.update}}
+        <h5 class='updateMsg'> {{messages.update}}</h5>
+      {{/if}}
     </div>
   </div>
 
@@ -31,7 +34,6 @@
       <div class="col-12">
         <div>
           <button type="submit" class="btn btn-info mx-auto save">Save</button>
-          <input type="hidden" name="username" value={{username}}>
         </div>
       </div>
     </div>

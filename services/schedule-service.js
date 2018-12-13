@@ -20,7 +20,7 @@ module.exports = function ScheduleService (pool) {
     }
 
     async function getWaiterByName (name) {
-        let waiterResult = await pool.query('SELECT * FROM waiters WHERE username = $1', [name]);
+        let waiterResult = await pool.query('SELECT * FROM waiters WHERE LOWER(username) = LOWER($1)', [name]);
         let waiter = waiterResult.rows[0];
         return waiter;
     }
@@ -95,6 +95,10 @@ module.exports = function ScheduleService (pool) {
         return pool.query('DELETE FROM shifts WHERE waiter_id = $1', [id]);
     }
 
+    async function deleteShifts () {
+        return pool.query('DELETE FROM shifts');
+    }
+
     return {
         getWeekDays,
         createWaiter,
@@ -107,6 +111,7 @@ module.exports = function ScheduleService (pool) {
         checkShift,
         getShiftsByWaiterId,
         getShifts,
-        deleteShiftByWaiterId
+        deleteShiftByWaiterId,
+        deleteShifts
     };
 };

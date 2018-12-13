@@ -50,6 +50,7 @@ app.set('view engine', 'handlebars');
 app.get('/', scheduleRoutes.show);
 app.get('/waiters/:username?', scheduleRoutes.staff);
 app.post('/waiters/:username', scheduleRoutes.staff);
+app.post('/reset', scheduleRoutes.reset);
 app.get('/days', scheduleRoutes.admin);
 
 const PORT = process.env.PORT || 3007;

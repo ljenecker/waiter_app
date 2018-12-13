@@ -39,6 +39,11 @@ h1, h5 {
   display: block;
 }
 
+.reset {
+  margin-top: 50px;
+  display: block;
+}
+
 th {
   text-align: center;
 }
@@ -204,4 +209,8 @@ ul {
 
   padding: 0px;
   margin: 0px;
+}
+
+.updateMsg {
+  color: green;
 }

@@ -41,6 +41,7 @@ module.exports = function (scheduleService) {
                         });
                     }
                 }
+                req.flash('update', 'Your shifts has been updated!');
             }
 
             let shiftResult = await scheduleService.getShiftsByWaiterId(waiterResult.id);
@@ -95,10 +96,16 @@ module.exports = function (scheduleService) {
         try {
             let shifts = await scheduleService.getShifts();
             let listShifts = shiftsFormat(shifts);
+            let color = {};
+
+            for (let key in listShifts) {
+                let shiftResult = listShifts[key];
+                let dayResults = shiftResult.day;
+                let waitersResults = shiftResult.waiters;
+
+            }
 
             let weekDaysResult = await scheduleService.getWeekDays();
-
-            console.log(listShifts);
 
             res.render('admin', {
                 weekDays: weekDaysResult,
@@ -109,9 +116,21 @@ module.exports = function (scheduleService) {
         }
     };
 
+    async function reset (req, res, next) {
+        try {
+            await scheduleService.deleteShifts();
+            await scheduleService.deleteWaiters();
+            req.flash('update', 'Your waiters shifts has been reset!');
+            res.redirect('/days');
+        } catch (err) {
+            next(err);
+        }
+    };
+
     return {
         show,
         staff,
-        admin
+        admin,
+        reset
     };
 };

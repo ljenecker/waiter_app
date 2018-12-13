@@ -3,6 +3,9 @@
   <div class="row">
     <div class="col-12">
       <h1> Welcome Administrator</h1>
+      {{#if messages.update}}
+        <h5 class='updateMsg'> {{messages.update}}</h5>
+      {{/if}}
     </div>
   </div>
 
@@ -27,15 +30,15 @@
         </thead>
         <tbody>
           <tr>
-            {{#listShifts}}
-              <td class="green">
-                <ul>
-                  {{#each waiters}}
-                    <li>{{this}}</li>
-                  {{/each}}
-                </ul>
-              </td>
-            {{/listShifts}}
+                {{#listShifts}}
+                  <td class={{status}}>
+                    <ul>
+                      {{#each waiters}}
+                        <li>{{this}}</li>
+                      {{/each}}
+                    </ul>
+                  </td>
+                {{/listShifts}}
           </tr>
         </tbody>
       </table>
@@ -45,7 +48,9 @@
   <div class="row">
     <div class="col-12">
       <div>
-        <button type="submit" class="btn btn-info mx-auto save">Save</button>
+        <form method="post" action="/reset">
+          <button type="submit" class="btn btn-danger mx-auto reset">Reset</button>
+        </form>
       </div>
     </div>
   </div>

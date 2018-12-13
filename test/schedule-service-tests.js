@@ -275,6 +275,52 @@ describe('The waiters web app', function () {
         assert.deepStrictEqual(0, shift.length);
     });
 
+    it('should be able to delete all shifts and waiters', async function () {
+        let scheduleService = ScheduleService(pool);
+
+        let waiter = await scheduleService.createWaiter('Lorenzo');
+
+        await scheduleService.createShift({
+            waiter_id: waiter.id,
+            day_number: 1
+        });
+
+        await scheduleService.createShift({
+            waiter_id: waiter.id,
+            day_number: 2
+        });
+
+        await scheduleService.createShift({
+            waiter_id: waiter.id,
+            day_number: 3
+        });
+
+        let waiter2 = await scheduleService.createWaiter('Andre');
+
+        await scheduleService.createShift({
+            waiter_id: waiter2.id,
+            day_number: 1
+        });
+
+        await scheduleService.createShift({
+            waiter_id: waiter2.id,
+            day_number: 2
+        });
+
+        await scheduleService.createShift({
+            waiter_id: waiter2.id,
+            day_number: 3
+        });
+
+        await scheduleService.deleteWaiters();
+        await scheduleService.deleteShifts();
+
+        let shift = await scheduleService.getShifts();
+
+        assert.deepStrictEqual(0, shift.length);
+    });
+
+
     after(function () {
         pool.end();
     });
