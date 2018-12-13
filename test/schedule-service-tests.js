@@ -121,7 +121,7 @@ describe('The waiters web app', function () {
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        assert.deepStrictEqual(1, shift.length);
+        assert.equal(1, shift.length);
     });
 
     it('should be able to get shift(s) by waiter id', async function () {
@@ -192,30 +192,37 @@ describe('The waiters web app', function () {
 
         let expectedShift = [{
             day: 'Monday',
+            status: 'red',
             waiters: ['Andre', 'Lorenzo']
         },
         {
             day: 'Tuesday',
+            status: 'red',
             waiters: []
         },
         {
             day: 'Wednesday',
+            status: 'red',
             waiters: ['Lorenzo']
         },
         {
             day: 'Thursday',
+            status: 'red',
             waiters: ['Andre']
         },
         {
             day: 'Friday',
+            status: 'red',
             waiters: ['Andre', 'Lorenzo']
         },
         {
             day: 'Saturday',
+            status: 'red',
             waiters: []
         },
         {
             day: 'Sunday',
+            status: 'red',
             waiters: []
         }
         ];
@@ -245,7 +252,7 @@ describe('The waiters web app', function () {
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        assert.deepStrictEqual(3, shift.length);
+        assert.equal(3, shift.length);
     });
 
     it('should be able to delete shift by waiter member', async function () {
@@ -272,7 +279,7 @@ describe('The waiters web app', function () {
 
         let shift = await scheduleService.getShiftsByWaiterId(waiter.id);
 
-        assert.deepStrictEqual(0, shift.length);
+        assert.equal(0, shift.length);
     });
 
     it('should be able to delete all shifts and waiters', async function () {
@@ -312,14 +319,23 @@ describe('The waiters web app', function () {
             day_number: 3
         });
 
-        await scheduleService.deleteWaiters();
         await scheduleService.deleteShifts();
+        await scheduleService.deleteWaiters();
 
         let shift = await scheduleService.getShifts();
 
-        assert.deepStrictEqual(0, shift.length);
-    });
+        let expectedShift = [
+            { day_number: 1, day_name: 'Monday', username: null },
+            { day_number: 2, day_name: 'Tuesday', username: null },
+            { day_number: 3, day_name: 'Wednesday', username: null },
+            { day_number: 4, day_name: 'Thursday', username: null },
+            { day_number: 5, day_name: 'Friday', username: null },
+            { day_number: 6, day_name: 'Saturday', username: null },
+            { day_number: 7, day_name: 'Sunday', username: null }
+        ];
 
+        assert.deepStrictEqual(expectedShift, shift);
+    });
 
     after(function () {
         pool.end();
