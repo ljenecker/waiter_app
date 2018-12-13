@@ -48,8 +48,9 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 app.get('/', scheduleRoutes.show);
-app.get('/waiters/:username?', scheduleRoutes.staff);
-app.post('/waiters/:username', scheduleRoutes.staff);
+app.post('/login', scheduleRoutes.login);
+app.get('/waiters/:username', scheduleRoutes.getStaffShift);
+app.post('/waiters/:username', scheduleRoutes.updateStaffShift);
 app.post('/reset', scheduleRoutes.reset);
 app.get('/days', scheduleRoutes.admin);
 

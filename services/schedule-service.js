@@ -1,7 +1,7 @@
 module.exports = function ScheduleService (pool) {
     async function getWeekDays () {
         let weekDaysResult = await pool.query('SELECT * FROM week_days');
-        weekDays = weekDaysResult.rows;
+        let weekDays = weekDaysResult.rows;
 
         return weekDays;
     }
